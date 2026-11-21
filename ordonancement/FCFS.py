@@ -10,10 +10,12 @@ t = 0
 
 for i in range(n):
     # Si le CPU est libre avant son arrivée, il attend
+    # puisque ils ont deja trie dans l'ordre d'arrivée on passe directement au premier
     if t < arrivee[i]:
         t = arrivee[i]
-    # Il s'exécute jusqu'au bout
+    # on l'exécute jusqu'au bout
     t = t + burst[i]
+
     fin[i] = t
 
 # Résultats

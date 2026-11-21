@@ -9,14 +9,13 @@ fin = [0] * n
 fait = [False] * n       # fait[i] = devient True si le processus i est termine
 
 t = 0
-termines = 0
 
-while termines < n:
+while False in fait:
     # 1. Parmi les processus arrives et pas finis, chercher la meilleure priorite
     choisi = -1          # -1 = personne choisi pour l'instant
     for i in range(n):
-        if arrivee[i] <= t and fait[i] == False:
-            if choisi == -1 or priorite[i] < priorite[choisi]:
+        if arrivee[i] <= t and fait[i] == False: #processus deja venu et pas fini
+            if choisi == -1 or priorite[i] < priorite[choisi]: # soit y a aucun processus choisi, soit il a une priorite plus faible
                 choisi = i
 
     # 2. Personne de pret : le CPU attend
@@ -25,10 +24,10 @@ while termines < n:
         continue
 
     #on execute le processus choisi
-    t = t + burst[choisi]
-    fin[choisi] = t
-    fait[choisi] = True
-    termines = termines + 1
+    else :
+        t = t + burst[choisi]
+        fin[choisi] = t
+        fait[choisi] = True
 
 # on affiche les resultats
 for i in range(n):
