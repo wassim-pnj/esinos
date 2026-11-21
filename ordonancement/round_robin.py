@@ -5,7 +5,7 @@ burst   = [5, 3, 8, 2]
 quantum = 3
 
 n = len(nom)
-restant = list(burst)
+restant = list(burst) #copie burst dans restant
 fin = [0] * n
 
 t = 0
@@ -15,8 +15,8 @@ p = -1          # processus qui vient de s'exécuter (-1 = aucun pour l'instant)
 
 while termines < n:
     # 1. Ajouter dans la file ceux qui sont arrivés
-    for i in range(n):
-        if arrivee[i] <= t and restant[i] > 0 and i not in file and i != p:
+for i in range(n):
+        if arrivee[i] <= t and restant[i] > 0 and i not in file and i != p: # processus deja venu, pas fini, pas deja dans la file et pas celui qui vient de s'executer
             file.append(i)
 
     # 2. Si la file est vide, le CPU attend
@@ -24,10 +24,10 @@ while termines < n:
         t = t + 1
         continue
 
-    # 3. Prendre le premier de la file
+    # 3. Prendre le premier de la file et l'enlever de la file (il va s'executer)
     p = file.pop(0)
 
-    # 4. Durée d'exécution
+    # 4. Durée d'exécution, burst restant ou quantum, selon le plus petit
     if restant[p] <= quantum:
         duree = restant[p]
     else:
@@ -37,7 +37,7 @@ while termines < n:
     t = t + duree
     restant[p] = restant[p] - duree
 
-    # 6. Ajouter les nouveaux arrivés (ils passent avant p)
+    # 6. Ajouter les nouveaux arrivés (ils passent avant p), mais pas ceux qui sont déjà dans la file et pas p lui-même
     for i in range(n):
         if arrivee[i] <= t and restant[i] > 0 and i not in file and i != p:
             file.append(i)

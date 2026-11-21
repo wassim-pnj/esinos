@@ -13,7 +13,7 @@ t = 0
 termines = 0
 
 while termines < n:
-    # 1. Parmi les processus arrivés et pas finis, chercher le plus petit "restant"
+    # 1. Parmi les processus arrivés et pas finis, chercher le plus petit burst restant
     choisi = -1
     for i in range(n):
         if arrivee[i] <= t and restant[i] > 0:
@@ -27,7 +27,7 @@ while termines < n:
 
     # 3. Le processus choisi s'exécute UNE unité
     t = t + 1
-    restant[choisi] = restant[choisi] - 1
+    restant[choisi] = restant[choisi] - 1   #on soustrait 1 du burst restant 
 
     # 4. S'il a fini, on note sa fin
     if restant[choisi] == 0:
